@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clash of Elements - Misi Decryptor</title>
+    <style>
+        * { box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+        body { 
+            background: #060919 url('https://img.freepik.com/free-vector/outer-space-background-with-glowing-stars-planets_107791-11883.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            margin: 0; 
+            padding: 20px; 
+        }
+        .card { 
+            background: rgba(13, 22, 48, 0.85); 
+            border-radius: 20px; 
+            padding: 30px; 
+            width: 100%; 
+            max-width: 900px; 
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.3), inset 0 0 15px rgba(56, 189, 248, 0.2); 
+            border: 2px solid #38bdf8; 
+            backdrop-filter: blur(8px);
+        }
+        .materi-tag {
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #cbd5e1;
+            margin-bottom: 5px;
+        }
+        .game-title {
+            text-align: center;
+            font-size: 42px;
+            font-weight: 900;
+            background: linear-gradient(180deg, #fef08a 0%, #eab308 50%, #ca8a04 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(234, 179, 8, 0.5);
+            margin: 5px 0 15px 0;
+            letter-spacing: 2px;
+        }
+        .sub-title {
+            text-align: center;
+            color: #38bdf8;
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+        }
+        .welcome-text {
+            text-align: center;
+            color: #f1f5f9;
+            font-size: 16px;
+            margin-bottom: 25px;
+        }
+        .input-group { margin: 20px 0; text-align: center; }
+        input[type="text"] { 
+            width: 80%; 
+            max-width: 450px;
+            padding: 14px; 
+            font-size: 18px; 
+            border-radius: 10px; 
+            border: 2px solid #38bdf8; 
+            background-color: #0b1329; 
+            color: #38bdf8; 
+            text-align: center; 
+            letter-spacing: 2px; 
+            font-weight: bold;
+            box-shadow: inset 0 0 10px rgba(56, 189, 248, 0.3);
+        }
+        
+        #pass-input {
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            box-shadow: 0 0 15px #38bdf8;
+        }
+        button { 
+            padding: 14px 28px; 
+            font-size: 16px; 
+            font-weight: bold; 
+            background: linear-gradient(180deg, #0284c7 0%, #0369a1 100%); 
+            color: white; 
+            border: 1px solid #38bdf8; 
+            border-radius: 10px; 
+            cursor: pointer; 
+            transition: 0.3s; 
+            margin-top: 15px; 
+            box-shadow: 0 0 15px rgba(2, 132, 199, 0.5);
+        }
+        button:hover { 
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.8);
+        }
+        .hidden { display: none; }
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .quiz-card {
+            background: rgba(11, 19, 41, 0.9);
+            border: 1px solid #38bdf8;
+            border-radius: 12px;
+            padding: 15px;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .quiz-number {
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            background: #0284c7;
+            color: #fff;
+            font-weight: bold;
+            padding: 2px 10px;
+            border-radius: 8px;
+            border: 1px solid #38bdf8;
+            font-size: 14px;
+        }
+        .quiz-title {
+            color: #fef08a;
+            font-weight: bold;
+            margin-top: 5px;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .quiz-text {
+            font-size: 13px;
+            line-height: 1.4;
+            color: #e2e8f0;
+        }
+
+        .alert-error { 
+            color: #f87171; 
+            text-align: center; 
+            font-weight: bold; 
+            margin-top: 15px; 
+            font-size: 15px;
+            text-shadow: 0 0 8px rgba(248, 113, 113, 0.5);
+        }
+        .success-box { text-align: center; }
+        .badge { 
+            background: linear-gradient(180deg, #fef08a 0%, #eab308 100%); 
+            color: #000; 
+            font-size: 22px; 
+            padding: 12px 25px; 
+            border-radius: 30px; 
+            font-weight: 900; 
+            display: inline-block; 
+            margin: 15px 0; 
+            box-shadow: 0 0 20px rgba(234, 179, 8, 0.8);
+        }
+        .podium { 
+            background: #0b1329; 
+            padding: 20px; 
+            border-radius: 12px; 
+            margin-top: 20px; 
+            text-align: left; 
+            border: 1px solid #38bdf8;
+        }
+        .podium ol { padding-left: 20px; color: #38bdf8; }
+        .podium li { margin-bottom: 8px; font-size: 16px; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="materi-tag">Materi: Konfigurasi Elektron & Sistem Periodik Unsur (SPU)</div>
+    <div class="game-title">⚔️ CLASH OF ELEMENTS 🧪</div>
+
+    <!-- TAMPILAN 1: TERKUNCI -->
+    <div id="stage-lock">
+        <div class="sub-title">🏆 MISI DECRYPTOR: PECAHKAN KODE RAHASIA PAMUNGKAS! 🏆</div>
+        <div class="welcome-text">Selamat Datang, Tim Detektif Kimia!</div>
+        
+        <div class="input-group">
+            <p style="color: #cbd5e1; margin-bottom: 10px;">Masukkan Password Akses Laptop untuk membuka Misi Decryptor:</p>
+            <input type="text" id="pass-input" placeholder="KODE PASSWORD" autocomplete="off"><br>
+            <button onclick="checkPassword()">BUKA AKSES</button>
+            <div id="pass-error" class="alert-error"></div>
+        </div>
+    </div>
+
+    <!-- TAMPILAN 2: MISI DECRYPTOR -->
+    <div id="stage-quest" class="hidden">
+        <div class="sub-title">🏆 MISI DECRYPTOR: TEMUKAN KODE KEMENANGAN! 🏆</div>
+        <p style="text-align: center; color: #cbd5e1; font-size: 14px; margin-bottom: 20px;">
+            Jawablah 7 petunjuk teka-teki di bawah ini berdasarkan 10 nomor atom yang telah kalian analisis.<br>Rangkaikan lambang unsur dari <b>Petunjuk 1 hingga 7</b> secara berurutan pada kotak jawaban akhir!
+        </p>
+
+        <!-- GRID 7 PETUNJUK TEKA-TEKI -->
+        <div class="grid-container">
+            <div class="quiz-card">
+                <div class="quiz-number">1</div>
+                <div class="quiz-title">Petunjuk 1:</div>
+                <div class="quiz-text">Aku adalah logam alkali tanah yang terletak di <b>Periode 5</b>. Siapakah aku?</div>
+            </div>
+            <div class="quiz-card">
+                <div class="quiz-number">2</div>
+                <div class="quiz-title">Petunjuk 2:</div>
+                <div class="quiz-text">Aku adalah unsur metalloid yang memiliki <b>5 kulit elektron</b> dan terdapat pada <b>Golongan 6A</b>. Siapakah aku?</div>
+            </div>
+            <div class="quiz-card">
+                <div class="quiz-number">3</div>
+                <div class="quiz-title">Petunjuk 3:</div>
+                <div class="quiz-text">Aku adalah logam yang terdapat di <b>Golongan IIA Periode 3</b>, sering digunakan untuk bahan kembang api. Siapakah aku?</div>
+            </div>
+            <div class="quiz-card">
+                <div class="quiz-number">4</div>
+                <div class="quiz-title">Petunjuk 4:</div>
+                <div class="quiz-text">Aku adalah logam transisi bernilai tinggi yang memiliki konfigurasi elektron berakhiran <b>4d¹⁰ 5s¹</b>. Siapakah aku?</div>
+            </div>
+            <div class="quiz-card">
+                <div class="quiz-number">5</div>
+                <div class="quiz-title">Petunjuk 5:</div>
+                <div class="quiz-text">Aku adalah unsur raksasa radioaktif golongan Aktinida dengan <b>nomor atom terbesar</b> di antara 10 angka tadi. Siapakah aku?</div>
+            </div>
+            <div class="quiz-card">
+                <div class="quiz-number">6</div>
+                <div class="quiz-title">Petunjuk 6:</div>
+                <div class="quiz-text">Aku adalah gas penyusun udara terbanyak yang berada di <b>Golongan VA Periode 2</b>. Siapakah aku?</div>
+            </div>
+            <div class="quiz-card">
+                <div class="quiz-number">7</div>
+                <div class="quiz-title">Petunjuk 7:</div>
+                <div class="quiz-text">Aku adalah logam unik yang berada di <b>Golongan IIIA Periode 4</b>, yang bisa meleleh hanya dengan suhu telapak tangan. Siapakah aku?</div>
+            </div>
+        </div>
+
+        <!-- INPUT JAWABAN KODE KEMENANGAN -->
+        <div class="input-group">
+            <input type="text" id="team-name" placeholder="NAMA TIM / KELOMPOK" style="margin-bottom: 15px;"><br>
+            <p style="color: #fef08a; font-weight: bold; margin-bottom: 8px;">Cerdas Bersama Tumbuh Setara</p>
+            <input type="text" id="code-input" placeholder="ISIKAN KODE KEMENANGAN" autocomplete="off"><br>
+            <button onclick="checkFinalCode()">KIRIM JAWABAN AKHIR</button>
+            <div id="code-error" class="alert-error"></div>
+        </div>
+    </div>
+
+    <!-- TAMPILAN 3: APRESIASI & HASIL -->
+    <div id="stage-success" class="hidden success-box">
+        <h2 style="color: #fef08a; font-size: 32px; margin-bottom: 5px;">🎉 SELAMAT & APRESIASI! 🎉</h2>
+        <p>Tim <b id="display-team" style="color: #38bdf8; font-size: 20px;">-</b> berhasil memecahkan kode rahasia pamungkas!</p>
+        
+        <div class="badge" id="display-rank">JUARA -</div>
+        <p><b>Apresiasi Point:</b> <span id="display-score" style="color: #4ade80; font-weight: bold; font-size: 22px;">+100 Poin</span></p>
+
+        <div class="podium">
+            <h3 style="margin-top:0; color:#38bdf8; text-align:center;">🏆 Papan Kelulusan Decryptor 🏆</h3>
+            <ol id="winner-list">
+                <!-- Daftar Pemenang -->
+            </ol>
+        </div>
+    </div>
+</div>
+
+<script>
+    const PASSWORD_LAPTOP = "3IB4VIA";
+    const FINAL_CODE = "SrTeMgAgUNGa";
+
+    function checkPassword() {
+        const input = document.getElementById('pass-input').value.trim().toUpperCase();
+        const errDiv = document.getElementById('pass-error');
+        
+        if (input === PASSWORD_LAPTOP) {
+            errDiv.innerText = "";
+            document.getElementById('stage-lock').classList.add('hidden');
+            document.getElementById('stage-quest').classList.remove('hidden');
+        } else {
+            errDiv.innerText = "silahkan coba kembali dengan pasword yang berbeda, teliti kembali sampai pasword benar dan berhasil, jangan menyerah dan tetap semangat";
+        }
+    }
+
+    function checkFinalCode() {
+        const teamName = document.getElementById('team-name').value.trim();
+        const inputCode = document.getElementById('code-input').value.trim();
+        const errDiv = document.getElementById('code-error');
+
+        if (!teamName) {
+            errDiv.innerText = "Isikan Nama Tim / Kelompok terlebih dahulu!";
+            return;
+        }
+
+        if (inputCode === FINAL_CODE) {
+            errDiv.innerText = "";
+            processWinner(teamName);
+        } else {
+            errDiv.innerText = "silahkan coba kembali dengan pasword yang berbeda, teliti kembali sampai pasword benar dan berhasil, jangan menyerah dan tetap semangat";
+        }
+    }
+
+    function processWinner(teamName) {
+        let winners = JSON.parse(localStorage.getItem('coc_winners')) || [];
+        let existingIndex = winners.findIndex(w => w.name.toLowerCase() === teamName.toLowerCase());
+        let rank;
+
+        if (existingIndex !== -1) {
+            rank = existingIndex + 1;
+        } else {
+            winners.push({ name: teamName, time: new Date().toLocaleTimeString() });
+            localStorage.setItem('coc_winners', JSON.stringify(winners));
+            rank = winners.length;
+        }
+
+        let points = 100;
+        if (rank === 1) points = 100;
+        else if (rank === 2) points = 90;
+        else if (rank === 3) points = 80;
+        else if (rank === 4) points = 75;
+        else if (rank === 5) points = 70;
+        else points = 60;
+
+        document.getElementById('display-team').innerText = teamName;
+        document.getElementById('display-rank').innerText = rank <= 5 ? `JUARA DECRYPTOR KE-${rank}` : `FINISHER KE-${rank}`;
+        document.getElementById('display-score').innerText = `+${points} Poin Utama`;
+
+        updateWinnerList(winners);
+
+        document.getElementById('stage-quest').classList.add('hidden');
+        document.getElementById('stage-success').classList.remove('hidden');
+    }
+
+    function updateWinnerList(winners) {
+        const listEl = document.getElementById('winner-list');
+        listEl.innerHTML = "";
+        
+        const maxDisplay = Math.min(winners.length, 5);
+        for (let i = 0; i < maxDisplay; i++) {
+            const li = document.createElement('li');
+            li.innerHTML = `<b>${winners[i].name}</b> <small style="color:#94a3b8">(${winners[i].time})</small>`;
+            listEl.appendChild(li);
+        }
+    }
+</script>
+
+</body>
+</html>
