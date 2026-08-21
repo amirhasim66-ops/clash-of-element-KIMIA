@@ -102,7 +102,7 @@
 
         <div class="input-group">
             <input type="text" id="team-name" placeholder="NAMA TIM / KELOMPOK" style="margin-bottom: 15px;"><br>
-            <p style="color: #fef08a; font-weight: bold; margin-bottom: 8px;">Hint Cerdas Bersama Tumbuh Setara</p>
+            <p style="color: #fef08a; font-weight: bold; margin-bottom: 8px;">Cerdas Bersama Tumbuh Setara</p>
             <input type="text" id="code-input" placeholder="ISIKAN KODE KEMENANGAN" autocomplete="off"><br>
             <button id="btn-submit" onclick="checkFinalCode()">KIRIM JAWABAN AKHIR</button>
             <div id="code-error" class="alert-error"></div>
@@ -110,11 +110,11 @@
     </div>
 
     <div id="stage-success" class="hidden success-box">
-        <h2 style="color: #fef08a; font-size: 32px; margin-bottom: 5px;">🎉 SELAMAT & APRESIASI! 🎉</h2>
-        <p>Tim <b id="display-team" style="color: #38bdf8; font-size: 20px;">-</b> berhasil memecahkan kode rahasia pamungkas!</p>
+        <h2 style="color: #fef08a; font-size: 32px; margin-bottom: 5px;">🎉 SELAMAT KALIAN HEBAT! 🎉</h2>
+        <p>Tim <b id="display-team" style="color: #38bdf8; font-size: 20px;">-</b> telah berhasil memecahkan kode rahasia pamungkas!</p>
         
         <div class="badge" id="display-rank">JUARA -</div>
-        <p><b>Apresiasi Point:</b> <span id="display-score" style="color: #4ade80; font-weight: bold; font-size: 22px;">+100 Poin</span></p>
+        <p><b>KALIAN HEBAT Point:</b> <span id="display-score" style="color: #4ade80; font-weight: bold; font-size: 22px;">+100 Poin</span></p>
 
         <div class="podium">
             <h3 style="margin-top:0; color:#38bdf8; text-align:center;">🏆 Peringkat Kemenangan Decryptor 🏆</h3>
@@ -228,7 +228,7 @@
                 else if (myRank === 3) points = 80;
                 else if (myRank === 4) points = 75;
                 else if (myRank === 5) points = 70;
-                else points = 60;
+                else points = 65;
 
                 document.getElementById('display-team').innerText = document.getElementById('team-name').value.trim();
                 document.getElementById('display-rank').innerText = myRank <= 5 ? `JUARA DECRYPTOR KE-${myRank}` : `FINISHER KE-${myRank}`;
